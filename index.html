@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/@finos/perspective-workspace/dist/umd/perspective-workspace.js"></script>
+    <script src="https://unpkg.com/@finos/perspective-viewer-datagrid/dist/umd/perspective-viewer-datagrid.js"></script>
+    <script src="https://unpkg.com/@finos/perspective-viewer-d3fc/dist/umd/perspective-viewer-d3fc.js"></script>
+    <script src="https://unpkg.com/@finos/perspective/dist/umd/perspective.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@finos/perspective-workspace/dist/umd/material.css"
+      is="custom-style"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <perspective-viewer
+      id="viewer"
+      editable
+      columns='["expiry","price", "qty"]'
+      row-pivots='["sym"]'
+      aggregates='{"expiry": "unique"}'
+      sort='[["expiry", "asc"]]'
+    >
+    </perspective-viewer>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", async function () {
+        const websocket = perspective.websocket(
+          "ws://localhost:8888/websocket"
+        );
+        const server_table = websocket.open_table("data_source_one");
+        const server_view = await server_table.view();
+        document.getElementById("viewer").load(server_table);
+      });
+    </script>
+  </body>
+</html>
