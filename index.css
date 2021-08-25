@@ -1,7 +1,9 @@
 perspective-viewer {
     flex: 1;
 }
-
+perspective-workspace {
+    flex: 1;
+}
 body {
     display: flex;
     flex-direction: column;

@@ -20,7 +20,7 @@
   </head>
 
   <body>
-    <perspective-viewer
+    <!-- <perspective-viewer
       id="viewer"
       editable
       columns='["expiry","price", "qty"]'
@@ -28,17 +28,9 @@
       aggregates='{"expiry": "unique"}'
       sort='[["expiry", "asc"]]'
     >
-    </perspective-viewer>
-
-    <script>
-      window.addEventListener("DOMContentLoaded", async function () {
-        const websocket = perspective.websocket(
-          "ws://localhost:8888/websocket"
-        );
-        const server_table = websocket.open_table("data_source_one");
-        const server_view = await server_table.view();
-        document.getElementById("viewer").load(server_table);
-      });
-    </script>
+    </perspective-viewer> -->
+    <perspective-workspace></perspective-workspace>
+ 
   </body>
+  <script src="index.js"></script>
 </html>
